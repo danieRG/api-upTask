@@ -146,6 +146,21 @@ const resolvers = {
             task = await Task.findOneAndUpdate({_id: id}, input, {new: true});
 
             return task;
+        },
+        deleteTask: async(_, {id}, ctx) => {
+            const task = await Task.findById(id);
+
+            if(!task){
+                throw new Error('Task not found');
+            }
+
+            if(task.autor.toString() !== ctx.user.id){
+                throw new Error('User not authorized');
+            }
+
+            await Task.findOneAndDelete({_id: id});
+
+            return 'Task deleted';
         }
     }
 } 

@@ -68,6 +68,7 @@ const  typeDefs = gql`
         #task
         newTask(input: InputTask): Task
         updateTask(id:ID!, input: InputTask, status: Boolean): Task 
+        deleteTask(id: ID!): String
     }
 `;
 
