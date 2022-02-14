@@ -13,11 +13,16 @@ const createToken = (user, secret, expiresIn) => {
 
 const resolvers = {
     Query: {
-        getProjects: async (_, {input}, ctx) => {
+        getProjects: async (_, {}, ctx) => {
             const projects = await Project.find({autor: ctx.user.id});
 
             return projects;
-        }
+        },
+        getTask: async (_, {input}, ctx) => {
+            const tasks = await Task.find({autor: ctx.user.id}).where('project').equals(input.project);
+
+            return tasks;
+        },
 
     },
     Mutation: {

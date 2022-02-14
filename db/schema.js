@@ -25,6 +25,7 @@ const  typeDefs = gql`
 
     type Query {
         getProjects: [Project]
+        getTask(input: InputIDProject): [Task]
     }
 
     input InputUser {
@@ -45,6 +46,10 @@ const  typeDefs = gql`
 
     input InputTask {
         name: String!
+        project: String!
+    }
+
+    input InputIDProject{
         project: String!
     }
 
